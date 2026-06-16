@@ -25,3 +25,6 @@
 		"@sveltejs/adapter-vercel": "^6.3.3"
 	}
 }
+ sed -i '/"type": "module",/a\  "engines": {
+	"node": ">=20"
+},' package.json
