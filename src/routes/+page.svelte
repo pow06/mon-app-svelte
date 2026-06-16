@@ -1,18 +1,20 @@
 <script lang="ts">
     import Task from "$lib/components/Task.svelte";
     import { taskStore } from "$lib/class/TaskStore.svelte";
-    import confetti from "@hiseb/confetti";
+    import { browser } from "$app/environment";;
 
     let input = $state("");
 
- $effect(() => {
-    if (taskStore.progress === 100) {
-        confetti({
-            position: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
-            count: 100,
-            size: 1,
-            velocity: 200,
-            fade: false
+$effect(() => {
+    if (taskStore.progress === 100 && browser) {
+        import("@hiseb/confetti").then(({ default: confetti }) => {
+            confetti({
+                position: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+                count: 100,
+                size: 1,
+                velocity: 200,
+                fade: false
+            });
         });
     }
 });
